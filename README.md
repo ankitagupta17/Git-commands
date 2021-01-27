@@ -26,3 +26,5 @@ jest classname
 npm run jest
 
 npm run jest -- -u
+
+npm run jest filename
