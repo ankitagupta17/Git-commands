@@ -35,4 +35,5 @@ to pull the code from feature branch
 open git bash
 go to the folder 
 git pull origin feature/HOMENB-875
+to make a new branch
 git checkout feature/HOMENB-875
