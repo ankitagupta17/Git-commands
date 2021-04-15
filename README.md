@@ -54,3 +54,11 @@ git checkout feature/HOMENB-875
 
 artifact --> war file which is generated
 environment --> develop, test, uat
+
+
+
+
+
+# cmd commands, to check which ports are up and to stop them.
+netstat -ano | findstr 9000                                 //9000 is port number
+taskkill /F /PID 34924                                     //34929 is pID
