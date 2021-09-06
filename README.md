@@ -62,3 +62,95 @@ environment --> develop, test, uat
 # cmd commands, to check which ports are up and to stop them.
 netstat -ano | findstr 9000                                 //9000 is port number
 taskkill /F /PID 34924                                     //34929 is pID
+
+
+
+JAVA STUFF
+
+composite key,
+controller advice,
+bad request,
+junit 5,
+@propertysource
+profiles mocking
+spring security
+
+
+
+spring profiles active
+
+
+
+to get the message:
+use @ContollerAdvice for generic Exception
+
+@org.springframework.web.bind.annotation.ControllerAdvice
+@RestController
+public class ControllerAdvice extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(GenericException.class)
+    public ResponseEntity<Object> handleException(
+            GenericException ex, WebRequest request)
+    {
+        Map<String,Object> map=new LinkedHashMap<>();
+        map.put("message",ex.getMessage());
+        return new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
+    }
+}
+
+
+public class GenericException extends RuntimeException{
+    public GenericException(String message)
+    {
+        super(message);
+    }
+}
+
+
+@PostMapping("/addItems")
+    public ResponseEntity<String> addItems(@Validated @RequestBody ItemModel items, BindingResult bindingResult) {
+        if(!bindingResult.hasErrors()) {
+            try {
+                itemService.addItems(items);
+            }
+            catch (Exception e){
+                throw new GenericException(e.getMessage());
+            }
+        } else {
+            return new ResponseEntity<String>("Field Required", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<String>("Item SuccessFully Added", HttpStatus.OK);
+    }
+
+
+
+
+Profiles in Spring:
+1. open Run/debug configuration.
+2. click on + -> maven -> 
+	command line->  spring-boot:run 
+	profiles->      
+
+Runner --> untick project settings
+VMOptions-> -Dspring.profiles.active=dev
+
+Apply
+
+3. In controller class, add
+
+ @Value("${message}")
+    private String message;
+
+after @Autowired annotation.
+
+
+    @PostMapping("/addCategory")
+    public ResponseEntity<String> addCategory(@Validated @RequestBody CategoryModel category, BindingResult bindingResult) {
+        System.out.println("aa "+message);
+
+4. aaplication.properties
+
+spring.profiles.active=dev
+message:"local envii"
+
+
