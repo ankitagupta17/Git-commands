@@ -65,6 +65,10 @@ taskkill /F /PID 34924                                     //34929 is pID
 
 
 
+#to compare branches in git
+https://github.com/ankitagupta17/Banking_Application/compare/master...feature/exception
+
+
 JAVA STUFF
 
 composite key,
